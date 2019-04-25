@@ -1,5 +1,4 @@
 ﻿using Security.Extensions;
-using Security.Random;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,11 +6,11 @@ namespace Security.Secrets
 {
     public class ShamirSecretShare : IShamirSecretShare
     {
-        private readonly IRng _rng;
+        private readonly IGf256 _gf256;
 
-        public ShamirSecretShare(IRng rng)
+        public ShamirSecretShare(IGf256 gf256)
         {
-            _rng = rng;
+            _gf256 = gf256;
         }
 
         public IEnumerable<byte[]> Split(byte[] secret, int parts, int minimum)
