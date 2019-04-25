@@ -21,6 +21,11 @@ namespace Security.Secrets
             throw new System.NotImplementedException();
         }
 
+        public byte Interpolate(byte[][] points)
+        {
+            throw new System.NotImplementedException();
+        }
+
         private static readonly byte[] Log =
         {
             0xff, 0x00, 0x19, 0x01, 0x32, 0x02, 0x1a, 0xc6, 0x4b, 0xc7, 0x1b, 0x68, 0x33, 0xee, 0xdf, 0x03, 0x64, 0x04, 0xe0, 0x0e, 0x34,

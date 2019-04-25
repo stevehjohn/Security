@@ -42,6 +42,8 @@ namespace Security.Secrets
             return result;
         }
 
+
+
         public IEnumerable<string> Split(byte[] secret, int parts, int minimum, ByteEncoding encoding)
         {
             var secrets = Split(secret, parts, minimum);

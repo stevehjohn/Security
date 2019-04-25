@@ -9,5 +9,7 @@ namespace Security.Secrets
         IEnumerable<string> Split(byte[] secret, int parts, int minimum, ByteEncoding encoding);
 
         IEnumerable<string> Split(string secret, int parts, int minimum, ByteEncoding encoding);
+
+        byte[] Join(IEnumerable<byte[]> parts);
     }
 }
