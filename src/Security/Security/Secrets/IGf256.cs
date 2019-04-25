@@ -4,6 +4,6 @@
     {
         byte[] Generate(int degree, byte input);
 
-        byte[] Evaluate(byte[] polynomial, int part);
+        byte Evaluate(byte[] polynomial, int part);
     }
 }

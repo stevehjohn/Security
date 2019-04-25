@@ -16,7 +16,7 @@ namespace Security.Secrets
             throw new System.NotImplementedException();
         }
 
-        public byte[] Evaluate(byte[] polynomial, int part)
+        public byte Evaluate(byte[] polynomial, int part)
         {
             throw new System.NotImplementedException();
         }
