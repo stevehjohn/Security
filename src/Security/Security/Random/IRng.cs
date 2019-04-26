@@ -2,6 +2,6 @@
 {
     public interface IRng
     {
-        byte[] GetBytes(int length);
+        void GetBytes(byte[] bytes);
     }
 }

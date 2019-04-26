@@ -13,7 +13,16 @@ namespace Security.Secrets
 
         public byte[] Generate(int degree, byte input)
         {
-            throw new System.NotImplementedException();
+            var polynomial = new byte[degree + 1];
+
+            //do
+            //{
+            //    _rng.GetBytes(polynomial);
+            //}
+
+            polynomial[0] = input;
+
+            return polynomial;
         }
 
         public byte Evaluate(byte[] polynomial, int part)

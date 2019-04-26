@@ -11,13 +11,9 @@ namespace Security.Random
             _rng = new RNGCryptoServiceProvider();
         }
 
-        public byte[] GetBytes(int length)
+        public void GetBytes(byte[] bytes)
         {
-            var bytes = new byte[length];
-
             _rng.GetBytes(bytes);
-
-            return bytes;
         }
     }
 }
