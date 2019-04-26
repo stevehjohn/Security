@@ -45,13 +45,13 @@ namespace Security.Tests.Secrets
 
             foreach (var part in parts)
             {
-                Console.WriteLine($"{part.ToBase64()} {part.ToHex()} ({part.Length})");
+                Console.WriteLine($"{part.ToBase64()} {part.ToHex()} {string.Join(", ", part.Select(p => $"{p,3}"))} ({part.Length})");
             }
 
             Console.WriteLine("\nCombining:\n");
-            Console.WriteLine($"{parts[a].ToBase64()} {parts[a].ToHex()} ({parts[a].Length})");
-            Console.WriteLine($"{parts[b].ToBase64()} {parts[b].ToHex()} ({parts[b].Length})");
-            Console.WriteLine($"{parts[c].ToBase64()} {parts[c].ToHex()} ({parts[c].Length})");
+            Console.WriteLine($"{a}: {parts[a].ToBase64()} ({parts[a].Length})");
+            Console.WriteLine($"{b}: {parts[b].ToBase64()} ({parts[b].Length})");
+            Console.WriteLine($"{c}: {parts[c].ToBase64()} ({parts[c].Length})");
 
             var toJoin = new List<byte[]>
                          {
