@@ -33,7 +33,7 @@ namespace Security.Tests.Secrets
         [TestCase("This is a secret", 0, 3, 4)]
         [TestCase("This is a secret", 1, 3, 4)]
         [TestCase("This is a secret", 2, 3, 4)]
-        public void Test(string secretString, int a, int b, int c)
+        public void Combining_parts_yields_original_secret(string secretString, int a, int b, int c)
         {
             Console.WriteLine($"{secretString} ({secretString.Length})");
 
@@ -41,10 +41,17 @@ namespace Security.Tests.Secrets
 
             var parts = _secretShare.Split(secret, 5, 3).ToList();
 
+            Console.WriteLine("\nGenerated:\n");
+
             foreach (var part in parts)
             {
                 Console.WriteLine($"{part.ToBase64()} {part.ToHex()} ({part.Length})");
             }
+
+            Console.WriteLine("\nCombining:\n");
+            Console.WriteLine($"{parts[a].ToBase64()} {parts[a].ToHex()} ({parts[a].Length})");
+            Console.WriteLine($"{parts[b].ToBase64()} {parts[b].ToHex()} ({parts[b].Length})");
+            Console.WriteLine($"{parts[c].ToBase64()} {parts[c].ToHex()} ({parts[c].Length})");
 
             var toJoin = new List<byte[]>
                          {
@@ -54,6 +61,8 @@ namespace Security.Tests.Secrets
                          };
 
             var joined = _secretShare.Join(toJoin);
+
+            Console.WriteLine("\nYields:\n");
 
             Console.WriteLine($"{Encoding.ASCII.GetString(joined)} ({joined.Length})");
 
