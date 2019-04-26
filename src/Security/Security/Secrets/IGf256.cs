@@ -6,6 +6,6 @@
 
         byte Evaluate(byte[] polynomial, int part);
 
-        byte Interpolate(byte[][] points);
+        byte Interpolate(byte[] values);
     }
 }

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Security.Secrets
 {
@@ -43,7 +43,25 @@ namespace Security.Secrets
 
         public byte[] Join(IEnumerable<byte[]> parts)
         {
-            throw new NotImplementedException();
+            var partsArray = parts.ToArray();
+
+            var secret = new byte[partsArray.Length];
+
+            for (var i = 0; i < secret.Length; i++)
+            {
+                var points = new byte[partsArray.Length];
+
+                var j = 0;
+                foreach (var part in partsArray)
+                {
+                    points[j] = part[i];
+                    j++;
+                }
+
+                secret[i] = _gf256.Interpolate(points);
+            }
+
+            return secret;
         }
     }
 }

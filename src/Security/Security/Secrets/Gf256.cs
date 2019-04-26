@@ -21,7 +21,7 @@ namespace Security.Secrets
             throw new System.NotImplementedException();
         }
 
-        public byte Interpolate(byte[][] points)
+        public byte Interpolate(byte[] values)
         {
             throw new System.NotImplementedException();
         }
