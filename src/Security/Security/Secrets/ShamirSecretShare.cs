@@ -45,17 +45,26 @@ namespace Security.Secrets
         {
             var partsArray = parts.ToArray();
 
-            var secret = new byte[partsArray[0].Length];
+            var partCount = partsArray.Length;
+            var length = partsArray[0].Length;
+
+            var secret = new byte[length];
 
             for (var i = 0; i < secret.Length; i++)
             {
-                var points = new byte[partsArray[0].Length];
+                var points = new byte[partCount][];
 
-                var j = 0;
+                for (var j = 0; j < partCount; j++)
+                {
+                    points[j] = new byte[length];
+                }
+
+                var k = 0;
                 foreach (var part in partsArray)
                 {
-                    points[j] = part[i];
-                    j++;
+                    points[k][0] = (byte) (k + 1);
+                    points[k][1] = part[i];
+                    k++;
                 }
 
                 secret[i] = _gf256.Interpolate(points);

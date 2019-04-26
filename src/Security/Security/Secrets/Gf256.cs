@@ -37,18 +37,18 @@ namespace Security.Secrets
             return result;
         }
 
-        public byte Interpolate(byte[] values)
+        public byte Interpolate(byte[][] points)
         {
             byte y = 0;
 
-            for (var i = 0; i < values.Length; i++) {
-                var aX = (byte)(i + 1);
-                var aY = values[i];
+            for (var i = 0; i < points.Length; i++) {
+                var aX = points[i][0];
+                var aY = points[i][1];
 
                 byte li = 1;
-                for (var j = 0; j < values.Length; j++)
+                for (var j = 0; j < points.Length; j++)
                 {
-                    var bX = (byte) (j + 1);
+                    var bX = points[j][0];
 
                     if (i != j)
                     {

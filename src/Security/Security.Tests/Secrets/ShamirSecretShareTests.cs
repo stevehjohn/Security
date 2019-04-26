@@ -25,28 +25,29 @@ namespace Security.Tests.Secrets
             _secretShare = new ShamirSecretShare(_gf256);
         }
 
-        [Test]
-        public void Test()
+        [TestCase("This is a secret")]
+        public void Test(string secretString)
         {
-            var secret = Encoding.Unicode.GetBytes("This is a secret");
+            Console.WriteLine($"{secretString} ({secretString.Length})");
 
-            var parts = _secretShare.Split(secret, 5, 3).ToList();
+            var secret = Encoding.ASCII.GetBytes(secretString);
+
+            var parts = _secretShare.Split(secret, 3, 2).ToList();
 
             foreach (var part in parts)
             {
-                Console.WriteLine(part.ToBase64());
+                Console.WriteLine($"{part.ToBase64()} ({part.Length})");
             }
 
             var toJoin = new List<byte[]>
                          {
                              parts[0],
-                             parts[2],
-                             parts[4]
+                             parts[1]
                          };
 
             var joined = _secretShare.Join(toJoin);
 
-            Console.WriteLine(Encoding.Unicode.GetString(joined));
+            Console.WriteLine($"{Encoding.ASCII.GetString(joined)} ({joined.Length})");
         }
     }
 }
