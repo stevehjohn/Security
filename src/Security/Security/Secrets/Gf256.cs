@@ -29,7 +29,7 @@ namespace Security.Secrets
         {
             byte result = 0;
 
-            for (var i = polynomial.Length - 1; i > 0; i--)
+            for (var i = polynomial.Length - 1; i > -1; i--)
             {
                 result = Add(Multiply(result, part), polynomial[i]);
             }

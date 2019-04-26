@@ -13,22 +13,16 @@ namespace Security.Tests.Random
             _rng = new Rng();
         }
 
-        //[TestCase(10)]
-        //[TestCase(100)]
-        //public void GetBytes_returns_requested_number_of_bytes(int length)
-        //{
-        //    var bytes = _rng.GetBytes(length);
+        [Test]
+        public void GetBytes_returns_different_data_on_subsequent_calls()
+        {
+            var first = new byte[100];
+            var second = new byte[100];
 
-        //    Assert.That(bytes.Length, Is.EqualTo(length));
-        //}
+            _rng.GetBytes(first);
+            _rng.GetBytes(second);
 
-        //[Test]
-        //public void GetBytes_returns_different_data_on_subsequent_calls()
-        //{
-        //    var first = _rng.GetBytes(100);
-        //    var second = _rng.GetBytes(100);
-
-        //    Assert.AreNotEqual(first, second);
-        //}
+            Assert.AreNotEqual(first, second);
+        }
     }
 }

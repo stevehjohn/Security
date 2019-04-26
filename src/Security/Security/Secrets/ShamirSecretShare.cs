@@ -12,7 +12,7 @@ namespace Security.Secrets
             _gf256 = gf256;
         }
 
-        public IEnumerable<byte[]> Split(byte[] secret, int parts, int minimum)
+        public IDictionary<int, byte[]> Split(byte[] secret, int parts, int minimum)
         {
             var values = new byte[parts][];
 
@@ -31,22 +31,20 @@ namespace Security.Secrets
                 }
             }
 
-            var result = new List<byte[]>();
+            var result = new Dictionary<int, byte[]>();
 
             for (var i = 0; i < parts; i++)
             {
-                result.Add(values[i]);
+                result.Add(i + 1, values[i]);
             }
 
             return result;
         }
 
-        public byte[] Join(IEnumerable<byte[]> parts)
+        public byte[] Join(IDictionary<int, byte[]> parts)
         {
-            var partsArray = parts.ToArray();
-
-            var partCount = partsArray.Length;
-            var length = partsArray[0].Length;
+            var partCount = parts.Count;
+            var length = parts.First().Value.Length;
 
             var secret = new byte[length];
 
@@ -60,10 +58,10 @@ namespace Security.Secrets
                 }
 
                 var k = 0;
-                foreach (var part in partsArray)
+                foreach (var part in parts)
                 {
-                    points[k][0] = (byte) (k + 1);
-                    points[k][1] = part[i];
+                    points[k][0] = (byte) part.Key;
+                    points[k][1] = part.Value[i];
                     k++;
                 }
 

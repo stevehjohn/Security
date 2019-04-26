@@ -32,17 +32,18 @@ namespace Security.Tests.Secrets
 
             var secret = Encoding.ASCII.GetBytes(secretString);
 
-            var parts = _secretShare.Split(secret, 3, 2).ToList();
+            var parts = _secretShare.Split(secret, 5, 3).ToList();
 
             foreach (var part in parts)
             {
-                Console.WriteLine($"{part.ToBase64()} ({part.Length})");
+                Console.WriteLine($"{part.Key}: {part.Value.ToBase64()} {part.Value.ToHex()} ({part.Value.Length})");
             }
 
-            var toJoin = new List<byte[]>
+            var toJoin = new Dictionary<int, byte[]>
                          {
-                             parts[0],
-                             parts[1]
+                             { parts[0].Key, parts[0].Value },
+                             { parts[3].Key, parts[3].Value },
+                             { parts[4].Key, parts[4].Value }
                          };
 
             var joined = _secretShare.Join(toJoin);
