@@ -12,7 +12,7 @@ namespace Security.Tests.Crypto
         [SetUp]
         public void SetUp()
         {
-            _cipher = new Cipher();
+            _cipher = new SymmetricCipher();
         }
 
         [Test]
