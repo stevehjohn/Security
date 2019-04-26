@@ -22,7 +22,7 @@ namespace Security.Tests.Secrets
             _rng = new Rng();
             _gf256 = new Gf256(_rng);
 
-            _secretShare = new ShamirSecretShare(_gf256);
+            _secretShare = new ShamirSecretShare(_gf256, _rng);
         }
 
         [TestCase("This is a secret", 0, 1, 2)]
