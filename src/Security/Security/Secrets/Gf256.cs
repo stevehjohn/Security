@@ -74,7 +74,7 @@ namespace Security.Secrets
                 return 0;
             }
 
-            return Exp[a + Log[b]];
+            return Exp[Log[a] + Log[b]];
         }
 
         private static byte Divide(byte a, byte b)

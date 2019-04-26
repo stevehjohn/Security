@@ -23,7 +23,7 @@ namespace Security.Secrets
 
             for (var i = 0; i < secret.Length; i++)
             {
-                var polynomial = _gf256.Generate(minimum, secret[i]);
+                var polynomial = _gf256.Generate(minimum - 1, secret[i]);
 
                 for (var j = 0; j < parts; j++)
                 {
