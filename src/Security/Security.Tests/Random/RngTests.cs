@@ -3,6 +3,7 @@ using Security.Random;
 
 namespace Security.Tests.Random
 {
+    [TestFixture]
     public class RngTests
     {
         private IRng _rng;

@@ -3,6 +3,7 @@ using Security.Extensions;
 
 namespace Security.Tests.Extensions
 {
+    [TestFixture]
     public class ByteArrayExtensionsTests
     {
         [Test]
