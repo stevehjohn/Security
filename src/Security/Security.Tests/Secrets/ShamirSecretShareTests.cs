@@ -25,8 +25,15 @@ namespace Security.Tests.Secrets
             _secretShare = new ShamirSecretShare(_gf256);
         }
 
-        [TestCase("This is a secret")]
-        public void Test(string secretString)
+        [TestCase("This is a secret", 0, 1, 2)]
+        [TestCase("This is a secret", 0, 1, 3)]
+        [TestCase("This is a secret", 0, 1, 4)]
+        [TestCase("This is a secret", 0, 1, 4)]
+        [TestCase("This is a secret", 0, 2, 4)]
+        [TestCase("This is a secret", 0, 3, 4)]
+        [TestCase("This is a secret", 1, 3, 4)]
+        [TestCase("This is a secret", 2, 3, 4)]
+        public void Test(string secretString, int a, int b, int c)
         {
             Console.WriteLine($"{secretString} ({secretString.Length})");
 
@@ -36,19 +43,21 @@ namespace Security.Tests.Secrets
 
             foreach (var part in parts)
             {
-                Console.WriteLine($"{part.Key}: {part.Value.ToBase64()} {part.Value.ToHex()} ({part.Value.Length})");
+                Console.WriteLine($"{part.ToBase64()} {part.ToHex()} ({part.Length})");
             }
 
-            var toJoin = new Dictionary<int, byte[]>
+            var toJoin = new List<byte[]>
                          {
-                             { parts[0].Key, parts[0].Value },
-                             { parts[3].Key, parts[3].Value },
-                             { parts[4].Key, parts[4].Value }
+                             parts[a],
+                             parts[b],
+                             parts[c]
                          };
 
             var joined = _secretShare.Join(toJoin);
 
             Console.WriteLine($"{Encoding.ASCII.GetString(joined)} ({joined.Length})");
+
+            Assert.That(joined, Is.EqualTo(secretString));
         }
     }
 }

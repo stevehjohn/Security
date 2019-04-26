@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Security.Secrets
@@ -12,16 +13,18 @@ namespace Security.Secrets
             _gf256 = gf256;
         }
 
-        public IDictionary<int, byte[]> Split(byte[] secret, int parts, int minimum)
+        public IEnumerable<byte[]> Split(byte[] secret, int parts, int minimum)
         {
             var values = new byte[parts][];
 
+            var length = secret.Length;
+
             for (var i = 0; i < parts; i++)
             {
-                values[i] = new byte[secret.Length];
+                values[i] = new byte[length];
             }
 
-            for (var i = 0; i < secret.Length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var polynomial = _gf256.Generate(minimum - 1, secret[i]);
 
@@ -31,20 +34,35 @@ namespace Security.Secrets
                 }
             }
 
-            var result = new Dictionary<int, byte[]>();
+            var result = new List<byte[]>();
 
             for (var i = 0; i < parts; i++)
             {
-                result.Add(i + 1, values[i]);
+                var value = new byte[length + 1];
+
+                value[0] = (byte) (i + 1);
+                Array.Copy(values[i], 0, value, 1, length);
+
+                result.Add(value);
             }
 
             return result;
         }
 
-        public byte[] Join(IDictionary<int, byte[]> parts)
+        public byte[] Join(IEnumerable<byte[]> parts)
         {
-            var partCount = parts.Count;
-            var length = parts.First().Value.Length;
+            var partsDictionary = new Dictionary<int, byte[]>();
+
+            foreach (var part in parts)
+            {
+                var value = new byte[part.Length - 1];
+                Array.Copy(part, 1, value, 0, part.Length - 1);
+
+                partsDictionary.Add(part[0], value);
+            }
+
+            var partCount = partsDictionary.Count;
+            var length = partsDictionary.First().Value.Length;
 
             var secret = new byte[length];
 
@@ -58,7 +76,7 @@ namespace Security.Secrets
                 }
 
                 var k = 0;
-                foreach (var part in parts)
+                foreach (var part in partsDictionary)
                 {
                     points[k][0] = (byte) part.Key;
                     points[k][1] = part.Value[i];
