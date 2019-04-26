@@ -27,7 +27,7 @@ namespace Security.Secrets
 
                 for (var j = 0; j < parts; j++)
                 {
-                    values[j][i] = _gf256.Evaluate(polynomial, j + 1);
+                    values[j][i] = _gf256.Evaluate(polynomial, (byte) (j + 1));
                 }
             }
 
@@ -45,11 +45,11 @@ namespace Security.Secrets
         {
             var partsArray = parts.ToArray();
 
-            var secret = new byte[partsArray.Length];
+            var secret = new byte[partsArray[0].Length];
 
             for (var i = 0; i < secret.Length; i++)
             {
-                var points = new byte[partsArray.Length];
+                var points = new byte[partsArray[0].Length];
 
                 var j = 0;
                 foreach (var part in partsArray)

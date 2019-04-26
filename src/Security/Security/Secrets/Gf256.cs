@@ -4,7 +4,7 @@ namespace Security.Secrets
 {
     public class Gf256 : IGf256
     {
-        private IRng _rng;
+        private readonly IRng _rng;
 
         public Gf256(IRng rng)
         {
@@ -15,24 +15,84 @@ namespace Security.Secrets
         {
             var polynomial = new byte[degree + 1];
 
-            //do
-            //{
-            //    _rng.GetBytes(polynomial);
-            //}
+            do
+            {
+                _rng.GetBytes(polynomial);
+            } while (Degree(polynomial) != degree);
 
             polynomial[0] = input;
 
             return polynomial;
         }
 
-        public byte Evaluate(byte[] polynomial, int part)
+        public byte Evaluate(byte[] polynomial, byte part)
         {
-            throw new System.NotImplementedException();
+            byte result = 0;
+
+            for (var i = polynomial.Length - 1; i > 0; i--)
+            {
+                result = Add(Multiply(result, part), polynomial[i]);
+            }
+
+            return result;
         }
 
         public byte Interpolate(byte[] values)
         {
-            throw new System.NotImplementedException();
+            byte y = 0;
+
+            for (var i = 0; i < values.Length; i++) {
+                var aX = (byte)(i + 1);
+                var aY = values[i];
+
+                byte li = 1;
+                for (var j = 0; j < values.Length; j++)
+                {
+                    var bX = (byte) (j + 1);
+
+                    if (i != j)
+                    {
+                        li = Multiply(li, Divide(Add(0, bX), Add(aX, bX)));
+                    }
+                }
+
+                y = Add(y, Multiply(li, aY));
+            }
+
+            return y;
+        }
+
+        private static byte Add(byte a, byte b)
+        {
+            return (byte) (a ^ b);
+        }
+
+        private static byte Multiply(byte a, byte b)
+        {
+            if (a == 0 || b == 0)
+            {
+                return 0;
+            }
+
+            return Exp[a + Log[b]];
+        }
+
+        private static byte Divide(byte a, byte b)
+        {
+            return Multiply(a, Exp[255 - Log[b]]);
+        }
+
+        private static int Degree(byte[] polynomial)
+        {
+            for (var i = polynomial.Length - 1; i > 0; i--)
+            {
+                if (polynomial[i] != 0)
+                {
+                    return i;
+                }
+            }
+
+            return 0;
         }
 
         private static readonly byte[] Log =
