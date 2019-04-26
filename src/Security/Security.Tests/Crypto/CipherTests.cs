@@ -7,7 +7,7 @@ namespace Security.Tests.Crypto
     [TestFixture]
     public class CipherTests
     {
-        private ICipher _cipher;
+        private ISymmetricCipher _cipher;
 
         [SetUp]
         public void SetUp()

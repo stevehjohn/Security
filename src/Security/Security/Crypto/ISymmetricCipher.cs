@@ -1,6 +1,6 @@
 ﻿namespace Security.Crypto
 {
-    public interface ICipher
+    public interface ISymmetricCipher
     {
         byte[] Encrypt(byte[] secret, byte[] key, byte[] iv, byte[] salt);
 

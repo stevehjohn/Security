@@ -4,7 +4,7 @@ using Org.BouncyCastle.Crypto.Parameters;
 
 namespace Security.Crypto
 {
-    public class Cipher : ICipher
+    public class SymmetricCipher : ISymmetricCipher
     {
         public byte[] Encrypt(byte[] secret, byte[] key, byte[] iv, byte[] salt)
         {
