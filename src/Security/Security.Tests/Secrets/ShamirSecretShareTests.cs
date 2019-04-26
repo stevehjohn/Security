@@ -28,9 +28,11 @@ namespace Security.Tests.Secrets
         [TestCase("This is a secret", 0, 1, 2)]
         [TestCase("This is a secret", 0, 1, 3)]
         [TestCase("This is a secret", 0, 1, 4)]
-        [TestCase("This is a secret", 0, 1, 4)]
+        [TestCase("This is a secret", 0, 2, 3)]
         [TestCase("This is a secret", 0, 2, 4)]
         [TestCase("This is a secret", 0, 3, 4)]
+        [TestCase("This is a secret", 1, 2, 3)]
+        [TestCase("This is a secret", 1, 2, 4)]
         [TestCase("This is a secret", 1, 3, 4)]
         [TestCase("This is a secret", 2, 3, 4)]
         public void Combining_parts_yields_original_secret(string secretString, int a, int b, int c)
