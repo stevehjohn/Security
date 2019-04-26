@@ -1,6 +1,5 @@
-﻿using Security.Extensions;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Security.Secrets
 {
@@ -42,27 +41,9 @@ namespace Security.Secrets
             return result;
         }
 
-
-
-        public IEnumerable<string> Split(byte[] secret, int parts, int minimum, ByteEncoding encoding)
+        public byte[] Join(IEnumerable<byte[]> parts)
         {
-            var secrets = Split(secret, parts, minimum);
-
-            var result = new List<string>();
-
-            foreach (var item in secrets)
-            {
-                result.Add(encoding == ByteEncoding.Base64
-                               ? item.ToBase64()
-                               : item.ToHex());
-            }
-
-            return result;
-        }
-
-        public IEnumerable<string> Split(string secret, int parts, int minimum, ByteEncoding encoding)
-        {
-            return Split(Encoding.Unicode.GetBytes(secret), parts, minimum, encoding);
+            throw new NotImplementedException();
         }
     }
 }
