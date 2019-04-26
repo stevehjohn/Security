@@ -1,6 +1,6 @@
-﻿using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Security.Crypto;
+using System.Text;
 
 namespace Security.Tests.Crypto
 {
