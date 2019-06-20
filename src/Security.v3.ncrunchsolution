@@ -1,6 +1,9 @@
 ﻿<SolutionConfiguration>
   <Settings>
     <AllowParallelTestExecution>False</AllowParallelTestExecution>
+    <MetricsExclusionList>
+      <Value>Security.Console\Security.Console.csproj</Value>
+    </MetricsExclusionList>
     <SolutionConfigured>True</SolutionConfigured>
   </Settings>
 </SolutionConfiguration>
