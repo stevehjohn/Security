@@ -6,6 +6,14 @@ namespace Security.Tests.CustomEncoding
     [TestFixture]
     public class Base16EncoderTests
     {
+        private IEncoder _encoder;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _encoder = new Base16Encoder();
+        }
+
         [TestCase(new byte[] { 1 }, "AC")]
         [TestCase(new byte[] { 2 }, "AD")]
         [TestCase(new byte[] { 3 }, "AF")]
@@ -30,9 +38,7 @@ namespace Security.Tests.CustomEncoding
         [TestCase(new byte[] { 128 }, "MA")]
         public void GetString_encodes_bytes_correctly(byte[] input, string expected)
         {
-            var encoder = new Base16Encoder();
-
-            Assert.That(encoder.GetString(input), Is.EqualTo(expected));
+            Assert.That(_encoder.GetString(input), Is.EqualTo(expected));
         }
 
         [TestCase("AC", new byte[] { 1 })]
@@ -59,19 +65,15 @@ namespace Security.Tests.CustomEncoding
         [TestCase("MA", new byte[] { 128 })]
         public void GetBytes_decodes_bytes_correctly(string input, byte[] expected)
         {
-            var encoder = new Base16Encoder();
-
-            Assert.That(encoder.GetBytes(input), Is.EqualTo(expected));
+            Assert.That(_encoder.GetBytes(input), Is.EqualTo(expected));
         }
 
         [TestCase(new byte[] { 1, 3, 62, 12, 65, 254, 98, 156})]
         public void Byte_arrays_can_be_encoded_and_decoded(byte[] input)
         {
-            var encoder = new Base16Encoder();
+            var encoded = _encoder.GetString(input);
 
-            var encoded = encoder.GetString(input);
-
-            var decoded = encoder.GetBytes(encoded);
+            var decoded = _encoder.GetBytes(encoded);
 
             Assert.That(decoded, Is.EqualTo(input));
         }
