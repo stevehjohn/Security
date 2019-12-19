@@ -1,6 +1,7 @@
 ﻿<SolutionConfiguration>
   <Settings>
     <AllowParallelTestExecution>False</AllowParallelTestExecution>
+    <InstrumentationMode>Optimised</InstrumentationMode>
     <MetricsExclusionList>
       <Value>Security.Console\Security.Console.csproj</Value>
     </MetricsExclusionList>
