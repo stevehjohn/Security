@@ -11,7 +11,7 @@ namespace Security.Tests.CustomEncoding
         [SetUp]
         public void SetUp()
         {
-            _encoder = new Base16Encoder();
+            _encoder = Encoder.Base16;
         }
 
         [TestCase(new byte[] { 1 }, "AC")]
