@@ -29,7 +29,7 @@ namespace Security.CustomEncoding
             {
                 var index = Alphabet.IndexOf(c);
 
-                result[i / 2] |= i % 2 == 0
+                result[i / 2] |= i % 2 != 1
                                      ? (byte) (index << 4)
                                      : (byte) index;
 
