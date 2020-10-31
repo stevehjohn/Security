@@ -9,10 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security.Tests", "Security.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EADAD994-95FC-45D4-9452-9CC3F8807060}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\README.md = ..\..\README.md
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.Console", "Security.Console\Security.Console.csproj", "{C8C7E65C-F98C-4FC6-8D15-8BE09F283A05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security.Console", "Security.Console\Security.Console.csproj", "{C8C7E65C-F98C-4FC6-8D15-8BE09F283A05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
