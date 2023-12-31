@@ -7,7 +7,8 @@
     <Description>Various useful crypto/security related functions.</Description>
     <Copyright>MIT</Copyright>
     <RepositoryUrl>https://github.com/stevehjohn/Security</RepositoryUrl>
-    <LangVersion>12</LangVersion>
+    <LangVersion>11</LangVersion>
+    <PackageId>Ocp.Security</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
