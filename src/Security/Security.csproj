@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Stevo John</Authors>
+    <Description>Various useful crypto/security related functions.</Description>
+    <Copyright>MIT</Copyright>
+    <RepositoryUrl>https://github.com/stevehjohn/Security</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
