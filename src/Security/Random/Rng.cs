@@ -8,7 +8,7 @@ namespace Security.Random
 
         public Rng()
         {
-            _rng = new RNGCryptoServiceProvider();
+            _rng = RandomNumberGenerator.Create();
         }
 
         public void GetBytes(byte[] bytes)
