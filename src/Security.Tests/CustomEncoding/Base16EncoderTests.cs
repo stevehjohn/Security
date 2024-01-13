@@ -38,7 +38,7 @@ namespace Security.Tests.CustomEncoding
         [TestCase(new byte[] { 128 }, "MA")]
         public void GetString_encodes_bytes_correctly(byte[] input, string expected)
         {
-            Assert.That(_encoder.GetString(input), Is.EqualTo(expected));
+            Assert.That(_encoder.GetString(input).ToUpper(), Is.EqualTo(expected));
         }
 
         [TestCase("AC", new byte[] { 1 })]

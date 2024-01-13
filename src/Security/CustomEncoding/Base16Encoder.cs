@@ -44,7 +44,7 @@ namespace Security.CustomEncoding
 
             foreach (var c in data)
             {
-                var index = Alphabet.IndexOf(c);
+                var index = Alphabet.IndexOf(char.ToUpper(c));
 
                 result[i / 2] |= i % 2 != 1
                                      ? (byte) (index << 4)
