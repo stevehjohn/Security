@@ -13,7 +13,7 @@ namespace Security.Console.Infrastructure
     {
         public static int Main(string[] args)
         {
-            return Parser.Default.ParseArguments<GenerateKeyOptions, SplitSecretOptions, CombineOptions, ToBase64Options, FromBase64Options, EncryptOptions>(args)
+            return Parser.Default.ParseArguments<GenerateKeyOptions, SplitSecretOptions, CombineOptions, ToBase64Options, FromBase64Options, EncryptOptions, DecryptOptions>(args)
                          .MapResult(
                              (GenerateKeyOptions options) => GenerateKey(options),
                              (SplitSecretOptions options) => SplitSecret(options),
@@ -21,6 +21,7 @@ namespace Security.Console.Infrastructure
                              (ToBase64Options options) => ToBase64(options),
                              (FromBase64Options options) => FromBase64(options),
                              (EncryptOptions options) => Encrypt(options),
+                             (DecryptOptions options) => Decrypt(options),
                              _ => 1);
         }
 
@@ -38,7 +39,26 @@ namespace Security.Console.Infrastructure
 
             var encrypted = cipher.Encrypt(data, key, iv, salt);
             
-            Output($"\n  Encrypted data: {Convert.ToBase64String(encrypted)}");
+            Output($"\n  Encrypted data: {Convert.ToBase64String(encrypted)}\n");
+
+            return 0;
+        }
+        
+        private static int Decrypt(DecryptOptions options)
+        {
+            var key = Convert.FromBase64String(options.Key);
+
+            var iv = Convert.FromBase64String(options.Iv);
+
+            var salt = Convert.FromBase64String(options.Salt);
+
+            var secret = Convert.FromBase64String(options.Data);
+
+            var cipher = new SymmetricCipher();
+
+            var encrypted = cipher.Decrypt(secret, key, iv, salt);
+            
+            Output($"\n  Decrypted data: {Convert.ToBase64String(encrypted)}\n");
 
             return 0;
         }
@@ -57,7 +77,7 @@ namespace Security.Console.Infrastructure
 
             rng.GetBytes(bytes);
 
-            Output($"\n  Key: {Convert.ToBase64String(bytes)}");
+            Output($"\n  Key: {Convert.ToBase64String(bytes)}\n");
 
             return 0;
         }
@@ -105,7 +125,7 @@ namespace Security.Console.Infrastructure
                 Output($"  {i + 1, 2}: {Convert.ToBase64String(parts[i])}");
             }
 
-            Output($"\n  Any {options.Minimum} of these can be combined to obtain the original secret.");
+            Output($"\n  Any {options.Minimum} of these can be combined to obtain the original secret.\n");
 
             return 0;
         }
@@ -151,7 +171,7 @@ namespace Security.Console.Infrastructure
 
             var secret = joiner.Join(parts);
 
-            Output($"\n  Secret: {Convert.ToBase64String(secret)}");
+            Output($"\n  Secret: {Convert.ToBase64String(secret)}\n");
 
             return 0;
         }
@@ -165,7 +185,7 @@ namespace Security.Console.Infrastructure
             }
 
             Output($"\n  Original text: {options.Text}");
-            Output($"\n  Base 64: {Convert.ToBase64String(Encoding.Unicode.GetBytes(options.Text))}");
+            Output($"\n  Base 64: {Convert.ToBase64String(Encoding.Unicode.GetBytes(options.Text))}\n");
 
             return 0;
         }
@@ -184,14 +204,14 @@ namespace Security.Console.Infrastructure
                 return 0;
             }
 
-            Output($"\n Original text: {Encoding.Unicode.GetString(bytes)}");
+            Output($"\n Original text: {Encoding.Unicode.GetString(bytes)}\n");
 
             return 0;
         }
 
         private static void Error(string message)
         {
-            System.Console.WriteLine($"ERROR:\n  {message}");
+            System.Console.WriteLine($"ERROR:\n  {message}\n");
         }
 
         private static void Output(string message)
