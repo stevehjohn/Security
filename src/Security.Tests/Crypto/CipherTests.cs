@@ -28,13 +28,13 @@ namespace Security.Tests.Crypto
 
             var cipherBytes = _cipher.Encrypt(secretBytes, key, iv, salt);
 
-            Assert.AreNotEqual(secretBytes, cipherBytes);
+            Assert.That(secretBytes, Is.EqualTo(cipherBytes));
 
             var decipheredBytes = _cipher.Decrypt(cipherBytes, key, iv, salt);
 
             var decipheredText = Encoding.ASCII.GetString(decipheredBytes);
 
-            Assert.AreEqual(decipheredText, secretText);
+            Assert.That(decipheredText, Is.EqualTo(secretText));
         }
     }
 }
