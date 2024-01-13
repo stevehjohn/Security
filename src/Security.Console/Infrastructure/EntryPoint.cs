@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Text;
 using Security.Crypto;
+using Security.CustomEncoding;
 
 namespace Security.Console.Infrastructure
 {
@@ -13,7 +14,7 @@ namespace Security.Console.Infrastructure
     {
         public static int Main(string[] args)
         {
-            return Parser.Default.ParseArguments<GenerateKeyOptions, SplitSecretOptions, CombineOptions, ToBase64Options, FromBase64Options, EncryptOptions, DecryptOptions>(args)
+            return Parser.Default.ParseArguments<GenerateKeyOptions, SplitSecretOptions, CombineOptions, ToBase64Options, FromBase64Options, EncryptOptions, DecryptOptions, ToBase16Options>(args)
                          .MapResult(
                              (GenerateKeyOptions options) => GenerateKey(options),
                              (SplitSecretOptions options) => SplitSecret(options),
@@ -22,7 +23,19 @@ namespace Security.Console.Infrastructure
                              (FromBase64Options options) => FromBase64(options),
                              (EncryptOptions options) => Encrypt(options),
                              (DecryptOptions options) => Decrypt(options),
+                             (ToBase16Options options) => ToBase16(options),
                              _ => 1);
+        }
+
+
+        private static int ToBase16(ToBase16Options options)
+        {
+            var encoder = new Base16Encoder();
+            
+            Output($"\n  Original text: {options.Text}");
+            Output($"\n  Base 16: {encoder.GetString(Encoding.UTF8.GetBytes(options.Text))}\n");
+
+            return 0;
         }
 
         private static int Encrypt(EncryptOptions options)
