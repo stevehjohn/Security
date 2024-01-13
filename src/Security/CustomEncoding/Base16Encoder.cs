@@ -10,10 +10,27 @@ namespace Security.CustomEncoding
         {
             var result = new StringBuilder();
 
+            var rng = new System.Random();
+            
             foreach (var b in data)
             {
-                result.Append(Alphabet[(b & 0xF0) >> 4]);
-                result.Append(Alphabet[b & 0x0F]);
+                var c = Alphabet[(b & 0xcF0) >> 4];
+
+                if (rng.Next(2) == 0)
+                {
+                    c = char.ToLower(c);
+                }
+
+                result.Append(c);
+
+                c = Alphabet[b & 0x0F];
+
+                if (rng.Next(2) == 0)
+                {
+                    c = char.ToLower(c);
+                }
+                
+                result.Append(c);
             }
 
             return result.ToString();
