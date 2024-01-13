@@ -5,21 +5,42 @@ using Security.Secrets;
 using System;
 using System.Linq;
 using System.Text;
+using Security.Crypto;
 
 namespace Security.Console.Infrastructure
 {
-    public class EntryPoint
+    public static class EntryPoint
     {
         public static int Main(string[] args)
         {
-            return Parser.Default.ParseArguments<GenerateKeyOptions, SplitSecretOptions, CombineOptions, ToBase64Options, FromBase64Options>(args)
+            return Parser.Default.ParseArguments<GenerateKeyOptions, SplitSecretOptions, CombineOptions, ToBase64Options, FromBase64Options, EncryptOptions>(args)
                          .MapResult(
                              (GenerateKeyOptions options) => GenerateKey(options),
                              (SplitSecretOptions options) => SplitSecret(options),
                              (CombineOptions options) => Combine(options),
                              (ToBase64Options options) => ToBase64(options),
                              (FromBase64Options options) => FromBase64(options),
-                             errs => 1);
+                             (EncryptOptions options) => Encrypt(options),
+                             _ => 1);
+        }
+
+        private static int Encrypt(EncryptOptions options)
+        {
+            var key = Convert.FromBase64String(options.Key);
+
+            var iv = Convert.FromBase64String(options.Iv);
+
+            var salt = Convert.FromBase64String(options.Salt);
+
+            var data = Convert.FromBase64String(options.Data);
+
+            var cipher = new SymmetricCipher();
+
+            var encrypted = cipher.Encrypt(data, key, iv, salt);
+            
+            Output($"\n  Encrypted data: {Convert.ToBase64String(encrypted)}");
+
+            return 0;
         }
 
         private static int GenerateKey(GenerateKeyOptions options)
