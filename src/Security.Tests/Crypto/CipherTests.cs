@@ -28,7 +28,7 @@ namespace Security.Tests.Crypto
 
             var cipherBytes = _cipher.Encrypt(secretBytes, key, iv, salt);
 
-            Assert.That(secretBytes, Is.EqualTo(cipherBytes));
+            Assert.That(secretBytes, Is.Not.EqualTo(cipherBytes));
 
             var decipheredBytes = _cipher.Decrypt(cipherBytes, key, iv, salt);
 

@@ -23,7 +23,7 @@ namespace Security.Tests.Random
             _rng.GetBytes(first);
             _rng.GetBytes(second);
 
-            Assert.That(first, Is.EqualTo(second));
+            Assert.That(first, Is.Not.EqualTo(second));
         }
     }
 }
