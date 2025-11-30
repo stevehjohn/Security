@@ -1,7 +1,11 @@
-﻿using CommandLine;
+﻿// ReSharper disable UnusedAutoPropertyAccessor.Global
+
+using CommandLine;
+using JetBrains.Annotations;
 
 namespace Security.Console.Infrastructure.Settings;
 
+[UsedImplicitly]
 [Verb("GenerateKey", HelpText = "Generate a key for cryptographic operations.")]
 public class GenerateKeyOptions
 {

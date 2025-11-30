@@ -97,7 +97,7 @@ public static class EntryPoint
 
     private static int SplitSecret(SplitSecretOptions options)
     {
-        if (options.Parts < 2 || options.Parts > 16)
+        if (options.Parts is < 2 or > 16)
         {
             Error("Parts must be between 2 and 16.");
             return 0;
@@ -145,7 +145,7 @@ public static class EntryPoint
 
     private static int Combine(CombineOptions options)
     {
-        if (options.Parts < 2 || options.Parts > 16)
+        if (options.Parts is < 2 or > 16)
         {
             Error("Parts must be between 2 and 16.");
             return 0;

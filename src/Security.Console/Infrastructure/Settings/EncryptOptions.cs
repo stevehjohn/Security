@@ -1,7 +1,11 @@
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+
 using CommandLine;
+using JetBrains.Annotations;
 
 namespace Security.Console.Infrastructure.Settings;
 
+[UsedImplicitly]
 [Verb("Encrypt", HelpText = "Encrypt some data.")]
 public class EncryptOptions
 {

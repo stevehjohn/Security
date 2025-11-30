@@ -1,7 +1,11 @@
-﻿using CommandLine;
+﻿// ReSharper disable UnusedAutoPropertyAccessor.Global
+
+using CommandLine;
+using JetBrains.Annotations;
 
 namespace Security.Console.Infrastructure.Settings;
 
+[UsedImplicitly]
 [Verb("ToBase16", HelpText = "Convert a string to base 16.")]
 public class ToBase16Options
 {

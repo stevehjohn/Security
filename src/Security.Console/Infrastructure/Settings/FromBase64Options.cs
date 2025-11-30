@@ -1,7 +1,11 @@
-﻿using CommandLine;
+﻿// ReSharper disable UnusedAutoPropertyAccessor.Global
+
+using CommandLine;
+using JetBrains.Annotations;
 
 namespace Security.Console.Infrastructure.Settings;
 
+[UsedImplicitly]
 [Verb("FromBase64", HelpText = "Convert base 64 data into text.")]
 public class FromBase64Options
 {

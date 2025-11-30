@@ -1,7 +1,10 @@
-﻿using CommandLine;
+﻿// ReSharper disable UnusedAutoPropertyAccessor.Global
 
+using CommandLine;
+using JetBrains.Annotations;
 namespace Security.Console.Infrastructure.Settings;
 
+[UsedImplicitly]
 [Verb("SplitSecret", HelpText = "Split a secret so that parts that when recombined will reveal the secret.")]
 public class SplitSecretOptions
 {

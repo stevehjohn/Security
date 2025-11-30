@@ -1,7 +1,11 @@
-﻿using CommandLine;
+﻿// ReSharper disable UnusedAutoPropertyAccessor.Global
+
+using CommandLine;
+using JetBrains.Annotations;
 
 namespace Security.Console.Infrastructure.Settings;
 
+[UsedImplicitly]
 [Verb("Combine", HelpText = "Combine parts of a secret to obtain the original data.")]
 public class CombineOptions
 {

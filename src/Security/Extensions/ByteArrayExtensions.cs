@@ -4,13 +4,16 @@ namespace Security.Extensions;
 
 public static class ByteArrayExtensions
 {
-    public static string ToBase64(this byte[] bytes)
+    extension(byte[] bytes)
     {
-        return Convert.ToBase64String(bytes);
-    }
+        public string ToBase64()
+        {
+            return Convert.ToBase64String(bytes);
+        }
 
-    public static string ToHex(this byte[] bytes)
-    {
-        return BitConverter.ToString(bytes).Replace("-", "");
+        public string ToHex()
+        {
+            return Convert.ToHexString(bytes);
+        }
     }
 }
