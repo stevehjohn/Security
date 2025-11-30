@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Stevo John</Authors>
     <Description>Various useful crypto/security related functions.</Description>
     <Copyright>MIT</Copyright>
     <RepositoryUrl>https://github.com/stevehjohn/Security</RepositoryUrl>
-    <LangVersion>11</LangVersion>
+    <LangVersion>14</LangVersion>
     <PackageId>Ocp.Security</PackageId>
     <Version>1.0.1</Version>
   </PropertyGroup>
