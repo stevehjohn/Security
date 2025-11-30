@@ -14,6 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security.Console", "Security.Console\Security.Console.csproj", "{C8C7E65C-F98C-4FC6-8D15-8BE09F283A05}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{1C1D03C0-0B05-4049-9A9A-CB638573894B}"
+	ProjectSection(SolutionItems) = preProject
+		..\test.sh = ..\test.sh
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

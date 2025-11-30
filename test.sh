@@ -1,0 +1,1 @@
+dotnet test src -- NUnit.ConsoleOut=1
