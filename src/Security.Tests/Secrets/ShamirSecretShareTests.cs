@@ -4,12 +4,14 @@ using Security.Random;
 using Security.Secrets;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
 namespace Security.Tests.Secrets;
 
 [TestFixture]
+[SuppressMessage("Performance", "CA1859:Use concrete types when possible for improved performance")]
 public class ShamirSecretShareTests
 {
     private IRng _rng;

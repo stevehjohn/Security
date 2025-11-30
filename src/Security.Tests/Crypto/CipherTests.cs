@@ -1,10 +1,12 @@
-﻿using NUnit.Framework;
+﻿using System.Diagnostics.CodeAnalysis;
+using NUnit.Framework;
 using Security.Crypto;
 using System.Text;
 
 namespace Security.Tests.Crypto;
 
 [TestFixture]
+[SuppressMessage("Performance", "CA1859:Use concrete types when possible for improved performance")]
 public class CipherTests
 {
     private ISymmetricCipher _cipher;

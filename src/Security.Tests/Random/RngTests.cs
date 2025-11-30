@@ -1,9 +1,11 @@
-﻿using NUnit.Framework;
+﻿using System.Diagnostics.CodeAnalysis;
+using NUnit.Framework;
 using Security.Random;
 
 namespace Security.Tests.Random;
 
 [TestFixture]
+[SuppressMessage("Performance", "CA1859:Use concrete types when possible for improved performance")]
 public class RngTests
 {
     private IRng _rng;

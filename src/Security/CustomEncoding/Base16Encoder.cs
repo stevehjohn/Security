@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 
 namespace Security.CustomEncoding;
 
@@ -18,7 +19,7 @@ public class Base16Encoder : IEncoder
 
             if (rng.Next(2) == 0)
             {
-                c = char.ToLower(c);
+                c = char.ToLower(c, CultureInfo.InvariantCulture);
             }
 
             result.Append(c);
@@ -44,7 +45,7 @@ public class Base16Encoder : IEncoder
 
         foreach (var c in data)
         {
-            var index = Alphabet.IndexOf(char.ToUpper(c));
+            var index = Alphabet.IndexOf(char.ToUpper(c, CultureInfo.InvariantCulture));
 
             result[i / 2] |= i % 2 != 1
                 ? (byte) (index << 4)

@@ -4,12 +4,7 @@ namespace Security.Random;
 
 public class Rng : IRng
 {
-    private readonly RandomNumberGenerator _rng;
-
-    public Rng()
-    {
-        _rng = RandomNumberGenerator.Create();
-    }
+    private readonly RandomNumberGenerator _rng = RandomNumberGenerator.Create();
 
     public void GetBytes(byte[] bytes)
     {
