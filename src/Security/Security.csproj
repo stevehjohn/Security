@@ -9,7 +9,7 @@
     <RepositoryUrl>https://github.com/stevehjohn/Security</RepositoryUrl>
     <LangVersion>14</LangVersion>
     <PackageId>Ocp.Security</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
