@@ -1,19 +1,18 @@
 ﻿using System.Security.Cryptography;
 
-namespace Security.Random
+namespace Security.Random;
+
+public class Rng : IRng
 {
-    public class Rng : IRng
+    private readonly RandomNumberGenerator _rng;
+
+    public Rng()
     {
-        private readonly RandomNumberGenerator _rng;
+        _rng = RandomNumberGenerator.Create();
+    }
 
-        public Rng()
-        {
-            _rng = RandomNumberGenerator.Create();
-        }
-
-        public void GetBytes(byte[] bytes)
-        {
-            _rng.GetBytes(bytes);
-        }
+    public void GetBytes(byte[] bytes)
+    {
+        _rng.GetBytes(bytes);
     }
 }

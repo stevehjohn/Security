@@ -1,7 +1,6 @@
-﻿namespace Security.Random
+﻿namespace Security.Random;
+
+public interface IRng
 {
-    public interface IRng
-    {
-        void GetBytes(byte[] bytes);
-    }
+    void GetBytes(byte[] bytes);
 }

@@ -1,59 +1,58 @@
 ﻿using System.Text;
 
-namespace Security.CustomEncoding
+namespace Security.CustomEncoding;
+
+public class Base16Encoder : IEncoder
 {
-    public class Base16Encoder : IEncoder
+    private const string Alphabet = "ACDFGHJKMNRTUVWX";
+
+    public string GetString(byte[] data)
     {
-        private const string Alphabet = "ACDFGHJKMNRTUVWX";
+        var result = new StringBuilder();
 
-        public string GetString(byte[] data)
-        {
-            var result = new StringBuilder();
-
-            var rng = new System.Random();
+        var rng = new System.Random();
             
-            foreach (var b in data)
-            {
-                var c = Alphabet[(b & 0xcF0) >> 4];
-
-                if (rng.Next(2) == 0)
-                {
-                    c = char.ToLower(c);
-                }
-
-                result.Append(c);
-
-                c = Alphabet[b & 0x0F];
-
-                if (rng.Next(2) == 0)
-                {
-                    c = char.ToLower(c);
-                }
-                
-                result.Append(c);
-            }
-
-            return result.ToString();
-        }
-
-        public byte[] GetBytes(string data)
+        foreach (var b in data)
         {
-            var result = new byte[data.Length / 2];
+            var c = Alphabet[(b & 0xcF0) >> 4];
 
-            var i = 0;
-
-            foreach (var c in data)
+            if (rng.Next(2) == 0)
             {
-                var index = Alphabet.IndexOf(char.ToUpper(c));
-
-                result[i / 2] |= i % 2 != 1
-                                     ? (byte) (index << 4)
-                                     : (byte) index;
-
-                i++;
+                c = char.ToLower(c);
             }
 
-            return result;
+            result.Append(c);
+
+            c = Alphabet[b & 0x0F];
+
+            if (rng.Next(2) == 0)
+            {
+                c = char.ToLower(c);
+            }
+                
+            result.Append(c);
         }
+
+        return result.ToString();
+    }
+
+    public byte[] GetBytes(string data)
+    {
+        var result = new byte[data.Length / 2];
+
+        var i = 0;
+
+        foreach (var c in data)
+        {
+            var index = Alphabet.IndexOf(char.ToUpper(c));
+
+            result[i / 2] |= i % 2 != 1
+                ? (byte) (index << 4)
+                : (byte) index;
+
+            i++;
+        }
+
+        return result;
     }
 }
